@@ -17,6 +17,31 @@ export class ProductPageComponent implements OnInit {
       name: 'Kip',
       price: 10,
       description: 'Hallo, dit is een test beschrijving.'
+    },
+    {
+      name: 'Kip',
+      price: 10,
+      description: 'Hallo, dit is een test beschrijving.'
+    },
+    {
+      name: 'Kip',
+      price: 10,
+      description: 'Hallo, dit is een test beschrijving.'
+    },
+    {
+      name: 'Kip',
+      price: 10,
+      description: 'Hallo, dit is een test beschrijving.'
+    },
+    {
+      name: 'Kip',
+      price: 10,
+      description: 'Hallo, dit is een test beschrijving.'
+    },
+    {
+      name: 'Kip',
+      price: 10,
+      description: 'Hallo, dit is een test beschrijving.'
     }
   ];
 
