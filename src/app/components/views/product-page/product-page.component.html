@@ -1,5 +1,9 @@
-<div class="row">
-  <div class="col-md-2" *ngFor="let product of products; index as i;">
-    <app-product [product]="product" [addToCart]="addToCart"></app-product>
+<section class="mt-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3" *ngFor="let product of products; index as i;">
+        <app-product [product]="product"></app-product>
+      </div>
+    </div>
   </div>
-</div>
+</section>

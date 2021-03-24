@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductPageComponent } from './components/views/product-page/product-page.component';
 import { ProductComponent } from './components/views/product-page/product/product.component';
 import { BottomBarComponent } from './components/bottom-bar/bottom-bar.component';
+import { CartPageComponent } from './components/views/cart-page/cart-page.component';
 
 @NgModule({
   declarations: [
@@ -16,13 +17,15 @@ import { BottomBarComponent } from './components/bottom-bar/bottom-bar.component
     TopBarComponent,
     ProductPageComponent,
     ProductComponent,
-    BottomBarComponent
+    BottomBarComponent,
+    CartPageComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([
       {path: 'products', component: ProductPageComponent},
+      {path: 'cart', component: CartPageComponent},
       {path: '', redirectTo: '/products', pathMatch: 'full'},
     ]),
     HttpClientModule,

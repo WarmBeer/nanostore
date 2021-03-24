@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ApiService } from '../../../services/api/api.service';
 import { CartService } from '../../../services/cart/cart.service';
-import { ApiService } from '../../../api/api.service';
 import {Product} from '../../../models/product';
 
 @Component({
@@ -11,27 +11,16 @@ import {Product} from '../../../models/product';
 })
 export class ProductPageComponent implements OnInit {
 
-  public products: Product[];
-
   constructor(
-    private cartService: CartService,
-    private apiService: ApiService
-  ) { }
+    private apiService: ApiService,
+    private cartService: CartService
+  ) {}
 
   ngOnInit(): void {
-    this.apiService.getProducts().subscribe((data: any[]) => {
-      this.products = [];
-      console.log(data);
-      data.forEach((item) => {
-        const product = new Product(item.id, item.name, item.price, item.description, item.stock, item.image);
-        this.products.push(product);
-      });
-    });
+    this.apiService.getProducts();
   }
 
-  addToCart(product): void {
-    this.cartService.addToCart(product);
-    window.alert('Your product has been added to the cart!');
+  public get products(): Product[] {
+    return this.apiService.products;
   }
-
 }
