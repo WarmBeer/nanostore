@@ -1,11 +1,30 @@
 <section class="mt-4">
   <div class="container">
-    <div class="row" *ngFor="let product of items; index as i;">
-      <div class="p-4">
-        <h6>{{ product.name }}</h6>
-        <h6 class="subtitle">by Wisdom</h6>
-        <h5 class="font-medium m-b-30">{{product.price}}</h5>
-      </div>
-    </div>
+    <table class="table shop-table" *ngIf="cartService.items">
+      <tr>
+        <th class="b-0">Name</th>
+        <th class="b-0">Price</th>
+        <th class="b-0">Quantity</th>
+        <th class="b-0 text-right">Total Price</th>
+      </tr>
+      <tr *ngFor="let item of cartService.uniqueItems; let i = index">
+        <td>{{ item.getProduct().name }}</td>
+        <td>{{ item.getProduct().price | currency:'EUR':'symbol': '1.2-2' }}</td>
+        <td>
+          <button class="btn btn-primary btn-sm" (click)="cartService.removeFromCart(item.getFirstIndexInCart())">-</button>
+          {{ item.getQuantity() }}
+          <button class="btn btn-primary btn-sm" (click)="cartService.addToCart(item.getProduct())">+</button>
+        </td>
+        <td class="text-right">
+          <span class="b-0">{{ item.getProduct().price * item.getQuantity() | currency:'EUR':'symbol': '1.2-2' }}</span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" align="right">Subtotal : 0</td>
+        <td colspan="4" align="right">
+          <button class="btn btn-danger" (click)="cartService.clearCart()">Empty Cart</button>
+        </td>
+      </tr>
+    </table>
   </div>
 </section>

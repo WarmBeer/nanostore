@@ -9,12 +9,8 @@ import {CartService} from '../../services/cart/cart.service';
 })
 export class TopBarComponent implements OnInit {
 
-  constructor(private cartService: CartService) { }
+  constructor(public cartService: CartService) { }
 
   ngOnInit(): void {
-  }
-
-  public get items(): Product[] {
-    return this.cartService.getItems();
   }
 }

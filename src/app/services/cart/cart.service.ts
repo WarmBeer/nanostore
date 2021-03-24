@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Product} from '../../models/product';
+import {CartItem} from '../../models/cartItem';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +19,34 @@ export class CartService {
     if (!this._items) { this._items = []; }
   }
 
-  public getItems(): Product[] {
+  public clearCart(): void {
+    this._items = [];
+    this.updateCart();
+  }
+
+  public get items(): Product[] {
     return this._items;
+  }
+
+  public get uniqueItems(): CartItem[] {
+    const itemIds: string[] = [];
+    const uniqueItems: CartItem[] = [];
+
+    this._items.forEach((item, index) => {
+      if (itemIds.indexOf(item.id) < 0) {
+        const cartItem = new CartItem(item, index);
+        itemIds.push(item.id);
+        uniqueItems.push(cartItem);
+      } else {
+        uniqueItems.forEach((cartItem) => {
+          if (cartItem.getProduct().id === item.id) {
+            cartItem.increaseQuantityByOne();
+          }
+        });
+      }
+    });
+
+    return uniqueItems;
   }
 
   public addToCart(product: Product): void {
@@ -28,9 +55,7 @@ export class CartService {
   }
 
   public removeFromCart(index: number): void {
-    if (index > -1) {
-      this._items.splice(index, 1);
-    }
+    this._items.splice(index, 1);
     this.updateCart();
   }
 

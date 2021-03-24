@@ -9,12 +9,8 @@ import {Product} from '../../../models/product';
 })
 export class CartPageComponent implements OnInit {
 
-  constructor(private cartService: CartService) { }
+  constructor(public cartService: CartService) { }
 
   ngOnInit(): void {
-  }
-
-  public get items(): Product[] {
-    return this.cartService.getItems();
   }
 }

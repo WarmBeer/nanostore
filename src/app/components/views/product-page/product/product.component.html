@@ -3,7 +3,7 @@
   <img class="card-img-top" src="{{ product.image }}" alt="Card image cap">
   <div class="card-body">
     <h5 class="card-title">{{ product.name }}</h5>
-    <p class="" style="color: rgb(2, 192, 118)">€{{ product.price }}</p>
+    <p class="" style="color: rgb(2, 192, 118)">{{ product.price | currency:'EUR':'symbol': '1.2-2' }}</p>
     <p class="card-text">{{ product.description }}</p>
     <button type="button" class="btn btn-outline-success float-right" style="width: 100%" (click)="addToCart(product)">Add to cart</button>
   </div>
