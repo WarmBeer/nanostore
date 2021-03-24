@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Product} from '../../../models/product';
+import {Product} from '../../../../models/product';
 
 @Component({
   selector: 'app-product',
@@ -8,6 +8,7 @@ import {Product} from '../../../models/product';
 })
 export class ProductComponent implements OnInit {
   @Input() product: Product;
+  @Input() addToCart: (args: any) => void;
 
   constructor() { }
 
