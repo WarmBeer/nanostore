@@ -11,6 +11,8 @@ import { ProductComponent } from './components/views/product-page/product/produc
 import { BottomBarComponent } from './components/bottom-bar/bottom-bar.component';
 import { CartPageComponent } from './components/views/cart-page/cart-page.component';
 import { LoginComponent } from './components/views/login/login.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { LoginComponent } from './components/views/login/login.component';
       {path: '', redirectTo: '/products', pathMatch: 'full'},
     ]),
     HttpClientModule,
+    ReactiveFormsModule,
+    NgbAlertModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
