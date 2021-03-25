@@ -13,6 +13,7 @@ import { CartPageComponent } from './components/views/cart-page/cart-page.compon
 import { LoginComponent } from './components/views/login/login.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
+import { RegisterComponent } from './components/views/register/register.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
     ProductComponent,
     BottomBarComponent,
     CartPageComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -31,6 +33,7 @@ import {NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
       {path: 'products', component: ProductPageComponent},
       {path: 'cart', component: CartPageComponent},
       {path: 'login', component: LoginComponent},
+      {path: 'register', component: RegisterComponent},
       {path: '', redirectTo: '/products', pathMatch: 'full'},
     ]),
     HttpClientModule,
