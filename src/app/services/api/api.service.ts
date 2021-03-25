@@ -13,7 +13,8 @@ export class ApiService {
   private JWT_KEY = 'CryptoMarkt.Token';
   private API_SERVER = 'http://localhost:80';
   private PRODUCTS_ENDPOINT = '/products';
-  private AUTH_ENDPOINT = '/auth';
+  private AUTH_ENDPOINT = '/login';
+  private REGISTER_ENDPOINT = '/register';
   private MY_USER_ENDPOINT = '/myuser';
 
   // tslint:disable:variable-name
@@ -91,6 +92,23 @@ export class ApiService {
           this.deleteJwt();
         }
       );
+  }
+
+  public register(email, password, name): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.post(this.API_SERVER + this.REGISTER_ENDPOINT, { email, password, name })
+        .subscribe(
+          (data: any) => {
+            this._user = new User(data.user.email, data.user.name, data.user.role);
+            this._jwt = data.token;
+            this.saveJwt();
+            resolve('Register success!');
+          },
+          error => {
+            reject(error.error);
+          }
+        );
+    });
   }
 
   public logout(): void {

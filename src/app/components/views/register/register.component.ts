@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit {
 
     this.loading = true;
     this.error = '';
-    this.apiService.register(this.f.email.value, this.f.password.value, this.f.password.value)
+    this.apiService.register(this.f.email.value, this.f.password.value, this.f.name.value)
       .then(
         success => {
           console.log(success);
