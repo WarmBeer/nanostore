@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import {Product} from '../../models/product';
 import {CartItem} from '../../models/cartItem';
+import {ApiService} from '../api/api.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +11,13 @@ export class CartService {
 
   private CART_KEY = 'CryptoMarkt.Cart';
 
-  constructor() { this.initCart(); }
+  public purchasing = false;
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private apiService: ApiService
+  ) { this.initCart(); }
 
   // tslint:disable-next-line:variable-name
   private _items: Product[];
@@ -71,5 +79,25 @@ export class CartService {
 
   private updateCart(): void {
     localStorage.setItem(this.CART_KEY, JSON.stringify(this._items));
+  }
+
+  public checkout(): void {
+    if (this.apiService.getUser()) {
+      this.purchasing = true;
+      this.apiService.purchase(this.uniqueItems)
+        .then(
+          data => {
+            console.log(data);
+            this.purchasing = false;
+            this.router.navigate(['/order'], {queryParams: {orderId: data.orderId}});
+          },
+          fail => {
+            console.error(fail);
+            this.purchasing = false;
+          }
+        );
+    } else {
+      this.router.navigate(['/login'], {queryParams: {returnUrl: '/cart'}});
+    }
   }
 }

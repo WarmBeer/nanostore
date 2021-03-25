@@ -25,7 +25,10 @@
       <tr>
         <td colspan="4" align="right">
           <button class="btn btn-danger mr-2" (click)="cartService.clearCart()">Empty Cart</button>
-          <button class="btn btn-info" (click)="cartService.checkout()">Checkout</button>
+          <button class="btn btn-info" [disabled]="cartService.purchasing" (click)="cartService.checkout()">
+            <span *ngIf="cartService.purchasing" class="spinner-border spinner-border-sm mr-1"></span>
+            Checkout
+          </button>
         </td>
       </tr>
     </table>

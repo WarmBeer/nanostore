@@ -4,6 +4,7 @@ import {Product} from '../../models/product';
 import {throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {User} from '../../models/user';
+import {CartItem} from '../../models/cartItem';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,7 @@ export class ApiService {
   private AUTH_ENDPOINT = '/login';
   private REGISTER_ENDPOINT = '/register';
   private MY_USER_ENDPOINT = '/myuser';
+  private ORDER_ENDPOINT = '/order';
 
   // tslint:disable:variable-name
   private _user: User;
@@ -115,6 +117,49 @@ export class ApiService {
     this._user = undefined;
     this._jwt = '';
     this.deleteJwt();
+  }
+
+  public purchase(products: CartItem[]): Promise<any> {
+
+    const orders = [];
+
+    products.forEach((product) => {
+      const order = {
+        productId: product.getProduct().id,
+        name: product.getProduct().name,
+        quantity: product.getQuantity()
+      };
+      orders.push(order);
+    });
+
+    return new Promise((resolve, reject) => {
+      this.httpClient.post(this.API_SERVER + this.ORDER_ENDPOINT,
+        { orders },
+        { headers: new HttpHeaders({Authorization: 'Bearer ' + this._jwt})}
+        )
+        .subscribe(
+          (data: any) => {
+            resolve(data.orderId);
+          },
+          error => {
+            reject(error.error);
+          }
+        );
+    });
+  }
+
+  public getOrderById(orderId): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.get(this.API_SERVER + this.ORDER_ENDPOINT + `/${orderId}`)
+        .subscribe(
+          (data: any) => {
+            resolve(data);
+          },
+          error => {
+            reject(error.error);
+          }
+        );
+    });
   }
 
 }
