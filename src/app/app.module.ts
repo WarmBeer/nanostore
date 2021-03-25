@@ -10,6 +10,7 @@ import { ProductPageComponent } from './components/views/product-page/product-pa
 import { ProductComponent } from './components/views/product-page/product/product.component';
 import { BottomBarComponent } from './components/bottom-bar/bottom-bar.component';
 import { CartPageComponent } from './components/views/cart-page/cart-page.component';
+import { LoginComponent } from './components/views/login/login.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { CartPageComponent } from './components/views/cart-page/cart-page.compon
     ProductPageComponent,
     ProductComponent,
     BottomBarComponent,
-    CartPageComponent
+    CartPageComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -26,6 +28,7 @@ import { CartPageComponent } from './components/views/cart-page/cart-page.compon
     RouterModule.forRoot([
       {path: 'products', component: ProductPageComponent},
       {path: 'cart', component: CartPageComponent},
+      {path: 'login', component: LoginComponent},
       {path: '', redirectTo: '/products', pathMatch: 'full'},
     ]),
     HttpClientModule,

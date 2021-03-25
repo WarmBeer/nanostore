@@ -49,6 +49,16 @@ export class CartService {
     return uniqueItems;
   }
 
+  public get subtotal(): number {
+    let subTotal = 0.00;
+
+    this.uniqueItems.forEach((cartItem) => {
+      subTotal += (cartItem.getProduct().price * cartItem.getQuantity());
+    });
+
+    return subTotal;
+  }
+
   public addToCart(product: Product): void {
     this._items.push(product);
     this.updateCart();

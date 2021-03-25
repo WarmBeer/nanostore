@@ -20,9 +20,12 @@
         </td>
       </tr>
       <tr>
-        <td colspan="3" align="right">Subtotal : 0</td>
+        <td colspan="4" align="right">Subtotal : {{ cartService.subtotal | currency:'EUR':'symbol': '1.2-2' }}</td>
+      </tr>
+      <tr>
         <td colspan="4" align="right">
-          <button class="btn btn-danger" (click)="cartService.clearCart()">Empty Cart</button>
+          <button class="btn btn-danger mr-2" (click)="cartService.clearCart()">Empty Cart</button>
+          <button class="btn btn-info" (click)="cartService.checkout()">Checkout</button>
         </td>
       </tr>
     </table>
