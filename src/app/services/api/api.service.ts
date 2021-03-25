@@ -9,18 +9,27 @@ import {catchError} from 'rxjs/operators';
 })
 export class ApiService {
 
+  private JWT_KEY = 'CryptoMarkt.Token';
   private API_SERVER = 'http://localhost:80';
   private PRODUCTS_ENDPOINT = '/products';
   private AUTH_ENDPOINT = '/auth';
 
-  // tslint:disable-next-line:variable-name
-  private _user: {};
-  // tslint:disable-next-line:variable-name
-  private _products: Product[];
+  // tslint:disable:variable-name
+  private _user: {} = {};
+  private _jwt: string;
+  private _products: Product[] = [];
 
   constructor(private httpClient: HttpClient) {
-    this._user = {};
-    this._products = [];
+    this.initJwt();
+  }
+
+  private initJwt(): void {
+    this._jwt = localStorage.getItem(this.JWT_KEY);
+    if (!this._jwt) { this._jwt = ''; }
+  }
+
+  private saveJwt(): void {
+    localStorage.setItem(this.JWT_KEY, this._jwt);
   }
 
   public get products(): Product[] {
@@ -40,12 +49,18 @@ export class ApiService {
       });
   }
 
+  public getUser(): object {
+    return this._user.hasOwnProperty('email') ? this._user : undefined;
+  }
+
   public login(email, password): Promise<any> {
     return new Promise((resolve, reject) => {
         this.httpClient.post(this.API_SERVER + this.AUTH_ENDPOINT, { email, password })
           .subscribe(
-            data => {
-              this._user = data;
+            (data: any) => {
+              this._user = data.user;
+              this._jwt = data.token;
+              this.saveJwt();
               resolve('Login success!');
             },
             error => {
