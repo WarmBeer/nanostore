@@ -22,6 +22,11 @@
       <tr>
         <td colspan="4" align="right">Subtotal : {{ cartService.subtotal | currency:'EUR':'symbol': '1.2-2' }}</td>
       </tr>
+      <tr *ngIf="cartService.error">
+        <td colspan="4">
+          <ngb-alert type="danger" (close)="cartService.error = ''">{{ cartService.error }}</ngb-alert>
+        </td>
+      </tr>
       <tr>
         <td colspan="4" align="right">
           <button class="btn btn-danger mr-2" (click)="cartService.clearCart()">Empty Cart</button>

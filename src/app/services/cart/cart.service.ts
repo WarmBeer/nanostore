@@ -12,6 +12,7 @@ export class CartService {
   private CART_KEY = 'CryptoMarkt.Cart';
 
   public purchasing = false;
+  public error: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -84,6 +85,7 @@ export class CartService {
   public checkout(): void {
     if (this.apiService.getUser()) {
       this.purchasing = true;
+      this.error = '';
       this.apiService.purchase(this.uniqueItems)
         .then(
           data => {
@@ -92,9 +94,10 @@ export class CartService {
             this.clearCart();
             this.router.navigate(['/order', data]);
           },
-          fail => {
-            console.error(fail);
+          error => {
+            console.error(error);
             this.purchasing = false;
+            this.error = error.error;
           }
         );
     } else {
