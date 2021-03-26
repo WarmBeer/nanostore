@@ -1,0 +1,41 @@
+<section class="mt-4">
+  <div class="container">
+    <table class="table shop-table" *ngIf="cartService.items">
+      <tr>
+        <th class="b-0">Name</th>
+        <th class="b-0">Price</th>
+        <th class="b-0">Quantity</th>
+        <th class="b-0 text-right">Total Price</th>
+      </tr>
+      <tr *ngFor="let item of cartService.uniqueItems; let i = index">
+        <td>{{ item.getProduct().name }}</td>
+        <td>{{ item.getProduct().price | currency:'EUR':'symbol': '1.2-2' }}</td>
+        <td>
+          <button class="btn btn-primary btn-sm" (click)="cartService.removeFromCart(item.getFirstIndexInCart())">-</button>
+          {{ item.getQuantity() }}
+          <button class="btn btn-primary btn-sm" (click)="cartService.addToCart(item.getProduct())">+</button>
+        </td>
+        <td class="text-right">
+          <span class="b-0">{{ item.getProduct().price * item.getQuantity() | currency:'EUR':'symbol': '1.2-2' }}</span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="4" align="right">Subtotal : {{ cartService.subtotal | currency:'EUR':'symbol': '1.2-2' }}</td>
+      </tr>
+      <tr *ngIf="cartService.error">
+        <td colspan="4">
+          <ngb-alert type="danger" (close)="cartService.error = ''">{{ cartService.error }}</ngb-alert>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="4" align="right">
+          <button class="btn btn-danger mr-2" (click)="cartService.clearCart()">Empty Cart</button>
+          <button class="btn btn-info" [disabled]="cartService.purchasing" (click)="cartService.checkout()">
+            <span *ngIf="cartService.purchasing" class="spinner-border spinner-border-sm mr-1"></span>
+            Checkout
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</section>

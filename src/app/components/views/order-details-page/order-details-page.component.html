@@ -1,0 +1,28 @@
+<section class="mt-4">
+  <div class="container">
+    <h1>Thank you for your order!</h1>
+    <h6 *ngIf="order.id">Order: {{ order.id }}</h6>
+    <h6 *ngIf="order.paid">Paid: {{ order.paid }}</h6>
+    <h6 *ngIf="order.name">Name: {{ order.name }}</h6>
+    <h6 *ngIf="order.time">Time: {{ order.time |  date:'MM/dd/yyyy hh:mm' }}</h6>
+    <table class="table shop-table" *ngIf="order.products">
+      <tr>
+        <th class="b-0">Name</th>
+        <th class="b-0">Price</th>
+        <th class="b-0">Quantity</th>
+        <th class="b-0 text-right">Total Price</th>
+      </tr>
+      <tr *ngFor="let product of order.products; let i = index">
+        <td>{{ product.name }}</td>
+        <td>{{ product.price | currency:'EUR':'symbol': '1.2-2' }}</td>
+        <td>{{ product.quantity }}</td>
+        <td class="text-right">
+          <span class="b-0">{{ product.price * product.quantity | currency:'EUR':'symbol': '1.2-2' }}</span>
+        </td>
+      </tr>
+      <tr>
+        <td *ngIf="order.subtotal" colspan="4" align="right">Subtotal: {{ order.subtotal | currency:'EUR':'symbol': '1.2-2' }}</td>
+      </tr>
+    </table>
+  </div>
+</section>
