@@ -1,7 +1,8 @@
 <section class="mt-4">
   <div class="container">
-    <h1>Thank you for your purchase!</h1>
+    <h1>Thank you for your order!</h1>
     <h6 *ngIf="order.id">Order: {{ order.id }}</h6>
+    <h6 *ngIf="order.paid">Paid: {{ order.paid }}</h6>
     <h6 *ngIf="order.name">Name: {{ order.name }}</h6>
     <h6 *ngIf="order.time">Time: {{ order.time |  date:'MM/dd/yyyy hh:mm' }}</h6>
     <table class="table shop-table" *ngIf="order.products">
@@ -20,7 +21,7 @@
         </td>
       </tr>
       <tr>
-        <td *ngIf="order.subtotal" colspan="4" align="right">Subtotal : {{ order.subtotal | currency:'EUR':'symbol': '1.2-2' }}</td>
+        <td *ngIf="order.subtotal" colspan="4" align="right">Subtotal: {{ order.subtotal | currency:'EUR':'symbol': '1.2-2' }}</td>
       </tr>
     </table>
   </div>
