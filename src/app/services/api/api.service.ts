@@ -12,7 +12,7 @@ import {CartItem} from '../../models/cartItem';
 export class ApiService {
 
   private JWT_KEY = 'CryptoMarkt.Token';
-  private API_SERVER = 'http://localhost:80';
+  private API_SERVER = 'http://halobase.net:8020';
   private PRODUCTS_ENDPOINT = '/products';
   private AUTH_ENDPOINT = '/login';
   private REGISTER_ENDPOINT = '/register';
