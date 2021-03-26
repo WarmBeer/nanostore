@@ -89,6 +89,7 @@ export class CartService {
           data => {
             console.log(data);
             this.purchasing = false;
+            this.clearCart();
             this.router.navigate(['/order', data]);
           },
           fail => {

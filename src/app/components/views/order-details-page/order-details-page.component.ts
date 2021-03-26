@@ -10,7 +10,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class OrderDetailsPageComponent implements OnInit {
   private orderId: string;
-  public order = {};
+  public order: any = {};
 
   constructor(
     private route: ActivatedRoute,
