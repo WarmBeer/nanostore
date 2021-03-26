@@ -1,24 +1,24 @@
 <!-- Toolbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" routerLink="/products">CryptoMarkt</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+  <a class="navbar-brand font-weight-bold" style="color: #f7931a" routerLink="/products">CryptoMarkt</a>
+  <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
+    &#9776;
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" routerLink="/products">Market</a>
+        <a class="nav-link text-white" routerLink="/products" (click)="isMenuCollapsed = true">Market</a>
       </li>
     </ul>
 
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a *ngIf="!apiService.getUser()" class="nav-link" routerLink="/login">Login</a>
-        <a *ngIf="apiService.getUser()" class="nav-link" (click)="apiService.logout()">{{ apiService.getUser().email }}</a>
+        <a *ngIf="!apiService.getUser()" class="nav-link text-white" routerLink="/login" (click)="isMenuCollapsed = true">Login</a>
+        <a *ngIf="apiService.getUser()" class="nav-link text-white" (click)="apiService.logout()">{{ apiService.getUser().email }}(logout)</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/cart">Cart({{ cartService.items.length || 'Empty' }})</a>
+        <a class="nav-link text-white" routerLink="/cart" (click)="isMenuCollapsed = true">Cart({{ cartService.items.length || 'Empty' }})</a>
       </li>
     </ul>
   </div>

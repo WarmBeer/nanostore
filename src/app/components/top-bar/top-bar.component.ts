@@ -9,6 +9,7 @@ import {ApiService} from '../../services/api/api.service';
   styleUrls: ['./top-bar.component.css']
 })
 export class TopBarComponent implements OnInit {
+  public isMenuCollapsed = true;
 
   constructor(
     public cartService: CartService,

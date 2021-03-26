@@ -12,7 +12,7 @@ import { BottomBarComponent } from './components/bottom-bar/bottom-bar.component
 import { CartPageComponent } from './components/views/cart-page/cart-page.component';
 import { LoginComponent } from './components/views/login/login.component';
 import {ReactiveFormsModule} from '@angular/forms';
-import {NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbAlertModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { RegisterComponent } from './components/views/register/register.component';
 import { OrderDetailsPageComponent } from './components/views/order-details-page/order-details-page.component';
 
@@ -42,6 +42,7 @@ import { OrderDetailsPageComponent } from './components/views/order-details-page
     HttpClientModule,
     ReactiveFormsModule,
     NgbAlertModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
