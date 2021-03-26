@@ -36,7 +36,7 @@ import { OrderDetailsPageComponent } from './components/views/order-details-page
       {path: 'cart', component: CartPageComponent},
       {path: 'login', component: LoginComponent},
       {path: 'register', component: RegisterComponent},
-      {path: 'order', component: OrderDetailsPageComponent},
+      {path: 'order/:orderId', component: OrderDetailsPageComponent},
       {path: '', redirectTo: '/products', pathMatch: 'full'},
     ]),
     HttpClientModule,

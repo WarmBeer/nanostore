@@ -17,19 +17,21 @@ export class OrderDetailsPageComponent implements OnInit {
     private router: Router,
     public cartService: CartService,
     public apiService: ApiService,
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    this.orderId = this.route.snapshot.queryParams.orderId || '';
-    if (this.orderId) {
-      this.apiService.getOrderById(this.orderId)
-        .then(
-          data => { this.order = data; },
-          error => { this.router.navigate(['../']); }
-        );
-    } else {
-      this.router.navigate(['../']);
-    }
+    this.route.paramMap.subscribe(params => {
+      this.orderId = params.get('orderId');
+      if (this.orderId) {
+        this.apiService.getOrderById(this.orderId)
+          .then(
+            data => { this.order = data; },
+            error => { this.router.navigate(['../']); }
+          );
+      } else {
+        this.router.navigate(['../']);
+      }
+    });
   }
 
 }

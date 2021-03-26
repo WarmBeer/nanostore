@@ -89,7 +89,7 @@ export class CartService {
           data => {
             console.log(data);
             this.purchasing = false;
-            this.router.navigate(['/order'], {queryParams: {orderId: data.orderId}});
+            this.router.navigate(['/order', data]);
           },
           fail => {
             console.error(fail);

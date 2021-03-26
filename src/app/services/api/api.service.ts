@@ -150,10 +150,13 @@ export class ApiService {
 
   public getOrderById(orderId): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.httpClient.get(this.API_SERVER + this.ORDER_ENDPOINT + `/${orderId}`)
+      this.httpClient.get(
+        this.API_SERVER + this.ORDER_ENDPOINT + `/${orderId}`,
+        { headers: new HttpHeaders({Authorization: 'Bearer ' + this._jwt})}
+        )
         .subscribe(
           (data: any) => {
-            resolve(data);
+            resolve(data.order);
           },
           error => {
             reject(error.error);
